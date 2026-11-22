@@ -72,10 +72,18 @@
   .menu { display: flex; gap: 28px; }
   .menu a { color: var(--tinta); text-decoration: none; font-weight: 500; }
   .menu a:hover { color: var(--violeta); }
-  .abre-menu { display: none; font: inherit; font-weight: 600; padding: 10px 18px; border-radius: 999px; border: 2px solid var(--tinta); background: transparent; color: var(--tinta); cursor: pointer; }
+  .abre-menu { display: none; width: 48px; height: 48px; border-radius: 50%; border: 0; background: var(--papel); cursor: pointer; place-items: center; box-shadow: 0 8px 20px -10px rgba(40, 30, 120, .4); }
+  .abre-menu span, .abre-menu span::before, .abre-menu span::after { display: block; width: 20px; height: 2.5px; border-radius: 2px; background: var(--tinta); transition: transform .2s ease, background .2s ease; }
+  .abre-menu span { position: relative; }
+  .abre-menu span::before, .abre-menu span::after { content: ""; position: absolute; left: 0; }
+  .abre-menu span::before { top: -6.5px; }
+  .abre-menu span::after { top: 6.5px; }
+  .abre-menu[aria-expanded="true"] span { background: transparent; }
+  .abre-menu[aria-expanded="true"] span::before { transform: translateY(6.5px) rotate(45deg); }
+  .abre-menu[aria-expanded="true"] span::after { transform: translateY(-6.5px) rotate(-45deg); }
   @media (max-width: 720px) {
     .topo { flex-wrap: wrap; position: relative; }
-    .abre-menu { display: inline-flex; }
+    .abre-menu { display: grid; }
     .menu { display: none; flex-direction: column; gap: 0; width: 100%; margin-top: 16px; background: var(--papel); border-radius: 20px; padding: 8px; box-shadow: 0 20px 40px -20px rgba(40, 30, 120, .35); }
     .menu.aberto { display: flex; }
     .menu a { padding: 14px 16px; border-radius: 12px; font-size: 1.0625rem; }
@@ -198,7 +206,7 @@
       <img src="foto.jpg" alt="" width="40" height="40">
       Josué Caetano
     </a>
-    <button class="abre-menu" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+    <button class="abre-menu" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu"><span></span></button>
     <nav class="menu" id="menu" aria-label="Seções">
       <a href="#projetos">Projetos</a>
       <a href="#como-trabalho">Como trabalho</a>
@@ -432,12 +440,12 @@
   botaoMenu.addEventListener("click", () => {
     const aberto = menu.classList.toggle("aberto");
     botaoMenu.setAttribute("aria-expanded", aberto ? "true" : "false");
-    botaoMenu.textContent = aberto ? "Fechar" : "Menu";
+    botaoMenu.setAttribute("aria-label", aberto ? "Fechar menu" : "Abrir menu");
   });
   menu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
     menu.classList.remove("aberto");
     botaoMenu.setAttribute("aria-expanded", "false");
-    botaoMenu.textContent = "Menu";
+    botaoMenu.setAttribute("aria-label", "Abrir menu");
   }));
 
   // Se a foto do GitHub não carregar, mostra as iniciais.
