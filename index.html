@@ -200,6 +200,10 @@
   .contato-links { display: flex; flex-direction: column; gap: 12px; }
   .contato-links a { display: block; padding: 16px 22px; border-radius: 16px; background: var(--papel); color: var(--tinta); font-weight: 600; text-decoration: none; }
   .contato-links a:hover { background: var(--sol); }
+  .contato-links a[hidden] { display: none; }
+  .contato-links a.whats { background: #25D366; color: #0B2E1A; }
+  .contato-links a.whats span { color: #0B3D22; }
+  .contato-links a.whats:hover { background: #1FBE5B; }
   .contato-links a span { display: block; font-weight: 400; font-size: .9375rem; color: var(--tinta-suave); }
 
   footer { text-align: center; padding: 40px 0 56px; color: var(--tinta-suave); font-size: .9375rem; }
@@ -379,12 +383,9 @@
         <p>Me conta. Se der pra resolver com um site, sistema ou app, eu te mostro como e quanto custa. Se não der, também te falo.</p>
       </div>
       <div class="contato-links">
+        <a id="whatsapp" class="whats" href="#" hidden>WhatsApp<span id="whatsapp-numero"></span></a>
         <a href="https://github.com/Josue-Caetano">GitHub<span>github.com/Josue-Caetano</span></a>
-        <!-- Preencha e descomente:
-        <a href="https://wa.me/55DDDNUMERO">WhatsApp<span>(66) 9XXXX-XXXX</span></a>
-        <a href="https://www.linkedin.com/in/SEU-PERFIL">LinkedIn<span>linkedin.com/in/SEU-PERFIL</span></a>
-        <a href="mailto:SEU@EMAIL.com">E-mail<span>SEU@EMAIL.com</span></a>
-        -->
+
       </div>
     </div>
   </div>
@@ -448,6 +449,17 @@
   }));
 
   mostrar(0);
+
+  // WhatsApp: preencha o número (com 55 e DDD, só números). Vazio = botão escondido.
+  const WHATSAPP = "";
+  const WHATSAPP_MENSAGEM = "Olá, Josué! Vi seu site e quero conversar sobre um projeto.";
+  if (WHATSAPP) {
+    const w = document.getElementById("whatsapp");
+    w.href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(WHATSAPP_MENSAGEM);
+    const n = WHATSAPP.replace(/^55/, "");
+    document.getElementById("whatsapp-numero").textContent = "(" + n.slice(0, 2) + ") " + n.slice(2, -4) + "-" + n.slice(-4);
+    w.hidden = false;
+  }
 
   // Menu no celular
   const botaoMenu = document.querySelector(".abre-menu");
