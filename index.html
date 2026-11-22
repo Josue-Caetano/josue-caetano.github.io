@@ -163,6 +163,9 @@
   .projeto .print { margin: 24px 0 0; }
   .projeto .print img { display: block; width: 100%; height: auto; border-radius: 14px; border: 1.5px solid var(--linha); box-shadow: 0 20px 40px -24px rgba(40, 30, 120, .45); }
   .projeto .print figcaption { margin-top: 8px; font-size: .875rem; color: var(--tinta-suave); }
+  .projeto .print.celulares { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 420px; }
+  .projeto .print.celulares img { border-radius: 22px; }
+  .projeto .print.celulares figcaption { grid-column: 1 / -1; margin-top: 0; }
   .projeto h3 { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.01em; }
   .projeto .descricao { margin-top: 12px; color: var(--tinta-suave); max-width: 36em; }
   .tecnologias { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; padding: 0; list-style: none; }
@@ -325,7 +328,10 @@
     </article>
 
     <article class="projeto">
-      <p class="problema"><small>O problema</small>Quero testar meus sites no celular sem precisar do computador ligado.</p>
+      <div>
+        <p class="problema"><small>O problema</small>Quero testar meus sites no celular sem precisar do computador ligado.</p>
+        <figure class="print celulares"><img src="prints/android-lista.jpg" alt="Tela inicial do app Meus Projetos, com botões para adicionar projeto pelo GitHub, arquivo ZIP ou pasta, e um projeto de exemplo" width="480" height="1067" loading="lazy"><img src="prints/android-console.jpg" alt="Site de exemplo aberto no app, com uma anotação feita no editor de print e o console mostrando os erros da página" width="480" height="1067" loading="lazy"><figcaption>Lista de projetos e um site aberto com o console de erros</figcaption></figure>
+      </div>
       <div>
         <h3>Meus Projetos: app Android</h3>
         <p class="descricao">App que baixa projetos do GitHub ou de um ZIP e abre direto no celular, com console de erros, modo computador e print da página inteira com editor de anotações. O APK é gerado automaticamente a cada atualização.</p>
