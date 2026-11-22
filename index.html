@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Josué Caetano | Sites e sistemas com IA para pequenos negócios</title>
+<meta name="description" content="Crio sites, sistemas e apps para pequenos negócios usando inteligência artificial. Sinop – MT.">
+<meta property="og:title" content="Josué Caetano | Sites e sistemas com IA">
+<meta property="og:description" content="Você me explica o problema. Eu entrego o sistema funcionando.">
+<meta property="og:image" content="https://josue-caetano.github.io/foto.jpg">
+<meta property="og:url" content="https://josue-caetano.github.io/">
+<meta property="og:type" content="website">
+<link rel="icon" href="icone.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Figtree:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --fundo: #F2F1F8;
+    --papel: #FFFFFF;
+    --tinta: #1D1B3B;
+    --tinta-suave: #55526F;
+    --violeta: #5646D6;
+    --violeta-claro: #E7E4FB;
+    --menta: #0FA38A;
+    --menta-texto: #0B7A67;
+    --menta-claro: #DDF5F0;
+    --sol: #FFCB47;
+    --linha: #DCDAEA;
+
+    --display: "Bricolage Grotesque", system-ui, sans-serif;
+    --texto: "Figtree", system-ui, sans-serif;
+
+    --largura: 1120px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--fundo);
+    color: var(--tinta);
+    font-family: var(--texto);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--violeta); }
+  a:focus-visible, button:focus-visible {
+    outline: 3px solid var(--violeta);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  .faixa { max-width: var(--largura); margin: 0 auto; padding: 0 24px; }
+
+  h1, h2, h3 { font-family: var(--display); line-height: 1.1; margin: 0; }
+  h2 { font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 800; letter-spacing: -0.02em; }
+  h3 { font-size: 1.375rem; font-weight: 600; }
+  p { margin: 0; }
+
+  /* Topo */
+  .topo { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; }
+  .marca { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--tinta); font-family: var(--display); font-weight: 600; font-size: 1.125rem; }
+  .marca img { width: 40px; height: 40px; border-radius: 50%; }
+  .menu { display: flex; gap: 28px; }
+  .menu a { color: var(--tinta); text-decoration: none; font-weight: 500; }
+  .menu a:hover { color: var(--violeta); }
+  @media (max-width: 720px) { .menu { display: none; } }
+
+  /* Abertura */
+  .abertura { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; padding: 48px 0 96px; }
+  @media (max-width: 920px) { .abertura { grid-template-columns: 1fr; gap: 40px; padding-top: 24px; } }
+
+  .quem { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+  .quem img { width: 72px; height: 72px; border-radius: 50%; border: 3px solid var(--papel); box-shadow: 0 0 0 2px var(--violeta); }
+  .quem strong { display: block; font-family: var(--display); font-size: 1.25rem; }
+  .quem span { color: var(--tinta-suave); }
+
+  .abertura h1 { font-size: clamp(2.5rem, 6vw, 4.25rem); font-weight: 800; letter-spacing: -0.03em; }
+  .abertura h1 .linha2 { display: block; color: var(--violeta); }
+  .abertura .sub { margin-top: 24px; max-width: 34em; font-size: 1.1875rem; color: var(--tinta-suave); }
+
+  .acoes { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+  .botao { display: inline-flex; align-items: center; padding: 14px 24px; border-radius: 999px; font-weight: 600; text-decoration: none; border: 2px solid var(--tinta); transition: transform .15s ease; }
+  .botao:hover { transform: translateY(-2px); }
+  .botao.cheio { background: var(--tinta); color: var(--papel); }
+  .botao.vazado { color: var(--tinta); }
+
+  /* Conversa (elemento principal) */
+  .conversa { background: var(--papel); border-radius: 28px; padding: 24px; box-shadow: 0 30px 60px -30px rgba(40, 30, 120, .35); }
+  .abas { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+  .aba { font: inherit; font-size: .9375rem; font-weight: 600; padding: 8px 14px; border-radius: 999px; border: 1.5px solid var(--linha); background: transparent; color: var(--tinta-suave); cursor: pointer; }
+  .aba[aria-selected="true"] { background: var(--violeta); border-color: var(--violeta); color: var(--papel); }
+
+  .fala { display: flex; gap: 12px; align-items: flex-end; }
+  .fala + .fala { margin-top: 16px; }
+  .fala .rosto { flex: none; width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; font-family: var(--display); font-weight: 800; font-size: .875rem; }
+  .fala.cliente .rosto { background: var(--violeta-claro); color: var(--violeta); }
+  .fala.entrega { flex-direction: row-reverse; }
+  .fala.entrega .rosto { background: var(--menta); color: var(--papel); }
+  .fala.entrega .rosto img { width: 36px; height: 36px; border-radius: 50%; }
+
+  .balao { padding: 16px 18px; border-radius: 20px; max-width: 88%; }
+  .cliente .balao { background: var(--violeta-claro); border-bottom-left-radius: 6px; font-style: italic; }
+  .entrega .balao { background: var(--menta-claro); border-bottom-right-radius: 6px; }
+  .entrega .balao h3 { font-size: 1.25rem; margin-bottom: 6px; }
+  .entrega .balao ul { margin: 10px 0 0; padding-left: 18px; }
+  .entrega .balao li { margin: 2px 0; }
+  .entrega .balao .ver { display: inline-block; margin-top: 12px; font-weight: 600; color: var(--menta-texto); }
+  .quem-fala { display: block; font-size: .8125rem; font-weight: 600; color: var(--tinta-suave); margin-bottom: 4px; font-style: normal; }
+
+  .painel { transition: opacity .25s ease; }
+  .painel.trocando { opacity: 0; }
+
+  /* Seções */
+  section { padding: 96px 0; }
+  .intro-secao { max-width: 40em; margin-bottom: 48px; }
+  .intro-secao p { margin-top: 16px; color: var(--tinta-suave); font-size: 1.125rem; }
+
+  /* Sinceridade */
+  .sincero { background: var(--tinta); color: #ECEBF7; }
+  .sincero h2 { color: var(--papel); }
+  .sincero .intro-secao p { color: #BDBAD8; }
+  .sincero-grade { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+  @media (max-width: 820px) { .sincero-grade { grid-template-columns: 1fr; gap: 32px; } }
+  .sincero-grade h3 { color: var(--papel); margin-bottom: 12px; }
+  .sincero-grade p { color: #BDBAD8; }
+  .sincero-grade > div { border-top: 3px solid var(--violeta); padding-top: 20px; }
+  .sincero-grade > div.destaque { border-top-color: var(--sol); }
+  .frase-forte { margin-top: 56px; font-family: var(--display); font-size: clamp(1.5rem, 3vw, 2.125rem); font-weight: 600; line-height: 1.25; max-width: 28em; color: var(--papel); }
+  .frase-forte mark { background: var(--sol); color: var(--tinta); padding: 0 .2em; border-radius: 4px; }
+
+  /* Projetos */
+  .projeto { display: grid; grid-template-columns: 1fr 1.3fr; gap: 48px; padding: 44px 0; border-top: 1.5px solid var(--linha); }
+  .projeto:last-of-type { border-bottom: 1.5px solid var(--linha); }
+  @media (max-width: 820px) { .projeto { grid-template-columns: 1fr; gap: 20px; } }
+  .projeto .problema { font-family: var(--display); font-size: 1.375rem; line-height: 1.3; color: var(--violeta); }
+  .projeto .problema small { display: block; font-family: var(--texto); font-size: .9375rem; color: var(--tinta-suave); margin-bottom: 8px; }
+  .projeto h3 { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.01em; }
+  .projeto .descricao { margin-top: 12px; color: var(--tinta-suave); max-width: 36em; }
+  .tecnologias { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; padding: 0; list-style: none; }
+  .tecnologias li { font-size: .875rem; font-weight: 600; padding: 4px 12px; border-radius: 999px; background: var(--papel); border: 1.5px solid var(--linha); }
+  .projeto .ver { display: inline-block; margin-top: 20px; font-weight: 600; }
+
+  /* Como trabalho */
+  .passos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; counter-reset: passo; list-style: none; padding: 0; margin: 0; }
+  @media (max-width: 920px) { .passos { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .passos { grid-template-columns: 1fr; } }
+  .passos li { counter-increment: passo; }
+  .passos li::before { content: counter(passo); display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--violeta); color: var(--papel); font-family: var(--display); font-weight: 800; font-size: 1.125rem; margin-bottom: 16px; }
+  .passos li:last-child::before { background: var(--menta); }
+  .passos h3 { margin-bottom: 8px; }
+  .passos p { color: var(--tinta-suave); }
+
+  /* Trajetória */
+  .trajetoria { background: var(--papel); }
+  .linha-tempo { list-style: none; padding: 0; margin: 0; max-width: 44em; }
+  .linha-tempo li { display: grid; grid-template-columns: 140px 1fr; gap: 24px; padding: 20px 0; border-top: 1.5px solid var(--linha); }
+  @media (max-width: 560px) { .linha-tempo li { grid-template-columns: 1fr; gap: 4px; } }
+  .linha-tempo .quando { font-family: var(--display); font-weight: 600; color: var(--violeta); }
+  .linha-tempo p { color: var(--tinta-suave); margin-top: 4px; }
+  .linha-tempo strong { font-family: var(--display); font-size: 1.125rem; }
+
+  /* Contato */
+  .contato { text-align: left; }
+  .contato-caixa { background: var(--violeta); color: var(--papel); border-radius: 32px; padding: clamp(32px, 6vw, 64px); display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: end; }
+  @media (max-width: 820px) { .contato-caixa { grid-template-columns: 1fr; } }
+  .contato-caixa h2 { color: var(--papel); }
+  .contato-caixa p { margin-top: 16px; color: #E3E0FF; font-size: 1.125rem; max-width: 32em; }
+  .contato-links { display: flex; flex-direction: column; gap: 12px; }
+  .contato-links a { display: block; padding: 16px 22px; border-radius: 16px; background: var(--papel); color: var(--tinta); font-weight: 600; text-decoration: none; }
+  .contato-links a:hover { background: var(--sol); }
+  .contato-links a span { display: block; font-weight: 400; font-size: .9375rem; color: var(--tinta-suave); }
+
+  footer { padding: 40px 0 56px; color: var(--tinta-suave); font-size: .9375rem; }
+</style>
+</head>
+<body>
+
+<div class="faixa">
+  <header class="topo">
+    <a class="marca" href="#">
+      <img src="foto.jpg" alt="" width="40" height="40">
+      Josué Caetano
+    </a>
+    <nav class="menu" aria-label="Seções">
+      <a href="#projetos">Projetos</a>
+      <a href="#como-trabalho">Como trabalho</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </header>
+
+  <main>
+  <div class="abertura">
+    <div>
+      <div class="quem">
+        <img src="foto.jpg" alt="Foto de Josué Caetano" width="72" height="72">
+        <div>
+          <strong>Josué Caetano</strong>
+          <span>Criador de soluções com IA, Sinop – MT</span>
+        </div>
+      </div>
+      <h1>Você me explica o problema.<span class="linha2">Eu entrego o sistema funcionando.</span></h1>
+      <p class="sub">Crio sites, sistemas e apps para pequenos negócios usando inteligência artificial como ferramenta de trabalho. Sem mistério e sem enrolação.</p>
+      <div class="acoes">
+        <a class="botao cheio" href="#projetos">Ver projetos</a>
+        <a class="botao vazado" href="#contato">Falar comigo</a>
+      </div>
+    </div>
+
+    <div class="conversa" aria-label="Exemplos: o problema do cliente e o que eu entreguei">
+      <div class="abas" role="tablist">
+        <button class="aba" role="tab" aria-selected="true" data-i="0">Lava-jato</button>
+        <button class="aba" role="tab" aria-selected="false" data-i="1">Oficina de motos</button>
+        <button class="aba" role="tab" aria-selected="false" data-i="2">Calculadora</button>
+        <button class="aba" role="tab" aria-selected="false" data-i="3">App Android</button>
+      </div>
+      <div class="painel" role="tabpanel" aria-live="polite">
+        <div class="fala cliente">
+          <div class="rosto" aria-hidden="true">?</div>
+          <p class="balao"><span class="quem-fala">O problema</span><span id="pedido"></span></p>
+        </div>
+        <div class="fala entrega">
+          <div class="rosto" aria-hidden="true"><img src="foto.jpg" alt=""></div>
+          <div class="balao"><span class="quem-fala">O que eu entreguei</span><h3 id="entrega-nome"></h3><p id="entrega-texto"></p><ul id="entrega-itens"></ul><a class="ver" id="entrega-link" href="#">Ver o código no GitHub</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </main>
+</div>
+
+<section class="sincero" id="sincero">
+  <div class="faixa">
+    <div class="intro-secao">
+      <h2>Vou ser sincero com você</h2>
+      <p>Eu não sou o programador que digita cada linha de código na mão. Eu uso inteligência artificial para construir. E acho que isso é justamente o que você precisa saber antes de me contratar.</p>
+    </div>
+    <div class="sincero-grade">
+      <div>
+        <h3>O que eu faço bem</h3>
+        <p>Entendo o problema do seu negócio, explico com precisão o que precisa ser feito, conduzo a IA na construção e testo tudo até funcionar do jeito certo.</p>
+      </div>
+      <div>
+        <h3>O que ainda estou aprendendo</h3>
+        <p>Estudo programação por conta própria, como JavaScript, React e Git, para entender cada vez mais o que está por trás do que eu entrego.</p>
+      </div>
+      <div class="destaque">
+        <h3>Por que isso é bom pra você</h3>
+        <p>Entrega mais rápida, preço que cabe num pequeno negócio e alguém focado no seu problema, não em termos técnicos que você não precisa entender.</p>
+      </div>
+    </div>
+    <p class="frase-forte">O cliente não compra código. Ele compra <mark>o problema resolvido</mark>. É isso que eu entrego.</p>
+  </div>
+</section>
+
+<section id="projetos">
+  <div class="faixa">
+    <div class="intro-secao">
+      <h2>Projetos</h2>
+      <p>Sistemas completos, com código aberto no GitHub. Cada um começou com um problema real para resolver.</p>
+    </div>
+
+    <article class="projeto">
+      <p class="problema"><small>O problema</small>Controlo tudo numa planilha e me perco na fila de carros.</p>
+      <div>
+        <h3>Brilho: sistema para lava-jato</h3>
+        <p class="descricao">Aplicativo para Windows com fila de carros, agenda de horários, clientes e veículos, programa de fidelidade, caixa, relatórios, comprovante na impressora térmica, mensagens pelo WhatsApp e backup automático. Funciona sem internet.</p>
+        <ul class="tecnologias"><li>React</li><li>TypeScript</li><li>Tauri</li><li>SQLite</li><li>Testes automatizados</li></ul>
+        <a class="ver" href="https://github.com/Josue-Caetano/brilho-lavajato">Ver no GitHub</a>
+      </div>
+    </article>
+
+    <article class="projeto">
+      <p class="problema"><small>O problema</small>Preciso controlar ordem de serviço, peças, caixa e comissão dos mecânicos.</p>
+      <div>
+        <h3>OficinaMoto: gestão de oficina de motos</h3>
+        <p class="descricao">Sistema completo de oficina com ordens de serviço, venda de peças no balcão com leitor de código de barras, estoque, compras, caixa, contas a pagar e receber, comissões e 26 relatórios gerenciais. Cada usuário tem um nível de acesso.</p>
+        <ul class="tecnologias"><li>C#</li><li>.NET 8</li><li>Windows Forms</li><li>SQLite</li><li>Testes automatizados</li></ul>
+        <a class="ver" href="https://github.com/Josue-Caetano/oficina-moto">Ver no GitHub</a>
+      </div>
+    </article>
+
+    <article class="projeto">
+      <p class="problema"><small>O problema</small>Calculadora financeira é difícil pra quem nunca usou uma.</p>
+      <div>
+        <h3>Calc12 Financeira</h3>
+        <p class="descricao">Calculadora financeira no navegador, compatível com a HP 12C e pensada para iniciantes. Tem 11 assistentes com gráficos (financiamento Price e SAC, investimentos, VPL e TIR), 9 aulas interativas e explicação de cada tecla.</p>
+        <ul class="tecnologias"><li>JavaScript</li><li>HTML e CSS</li><li>Chart.js</li><li>Funciona offline</li></ul>
+        <a class="ver" href="https://github.com/Josue-Caetano/calc12-financeira">Ver no GitHub</a>
+      </div>
+    </article>
+
+    <article class="projeto">
+      <p class="problema"><small>O problema</small>Quero testar meus sites no celular sem precisar do computador ligado.</p>
+      <div>
+        <h3>Meus Projetos: app Android</h3>
+        <p class="descricao">App que baixa projetos do GitHub ou de um ZIP e abre direto no celular, com console de erros, modo computador e print da página inteira com editor de anotações. O APK é gerado automaticamente a cada atualização.</p>
+        <ul class="tecnologias"><li>Android</li><li>Java</li><li>GitHub Actions</li></ul>
+        <a class="ver" href="https://github.com/Josue-Caetano/meus-projetos-android">Ver no GitHub</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="como-trabalho">
+  <div class="faixa">
+    <div class="intro-secao">
+      <h2>Como eu trabalho</h2>
+      <p>Do primeiro papo até o sistema rodando no seu negócio.</p>
+    </div>
+    <ol class="passos">
+      <li><h3>A gente conversa</h3><p>Você me conta como funciona o seu dia a dia e onde está o problema. Pode ser pelo WhatsApp mesmo.</p></li>
+      <li><h3>Eu te mostro a ideia</h3><p>Explico em palavras simples o que vou construir, quanto custa e em quanto tempo fica pronto.</p></li>
+      <li><h3>Eu construo com IA</h3><p>Conduzo a inteligência artificial na construção e te mostro versões no caminho para você opinar.</p></li>
+      <li><h3>Testo e entrego</h3><p>Testo tudo com casos reais, instalo para você e ensino a usar.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="trajetoria" id="trajetoria">
+  <div class="faixa">
+    <div class="intro-secao">
+      <h2>De onde eu venho</h2>
+      <p>Não vim da faculdade de computação. Vim do balcão, da rua e do turno da noite, e é por isso que entendo quem empreende.</p>
+    </div>
+    <ol class="linha-tempo">
+      <li><span class="quando">Hoje</span><div><strong>Criador de soluções com IA</strong><p>Sites, sistemas e apps para pequenos negócios. Estudando programação por conta própria.</p></div></li>
+      <li><span class="quando">Desde 2022</span><div><strong>Empreendedor autônomo</strong><p>Meu próprio negócio de vendas. Aprendi a atender, negociar e resolver problema de cliente na hora.</p></div></li>
+      <li><span class="quando">Antes</span><div><strong>Porteiro, turno da noite</strong><p>Responsabilidade, pontualidade e confiança de quem cuida do patrimônio dos outros.</p></div></li>
+    </ol>
+  </div>
+</section>
+
+<section class="contato" id="contato">
+  <div class="faixa">
+    <div class="contato-caixa">
+      <div>
+        <h2>Tem um problema no seu negócio?</h2>
+        <p>Me conta. Se der pra resolver com um site, sistema ou app, eu te mostro como e quanto custa. Se não der, também te falo.</p>
+      </div>
+      <div class="contato-links">
+        <a href="https://github.com/Josue-Caetano">GitHub<span>github.com/Josue-Caetano</span></a>
+        <!-- Preencha e descomente:
+        <a href="https://wa.me/55DDDNUMERO">WhatsApp<span>(66) 9XXXX-XXXX</span></a>
+        <a href="https://www.linkedin.com/in/SEU-PERFIL">LinkedIn<span>linkedin.com/in/SEU-PERFIL</span></a>
+        <a href="mailto:SEU@EMAIL.com">E-mail<span>SEU@EMAIL.com</span></a>
+        -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="faixa">Josué Caetano, Sinop – MT. Site feito com auxílio de IA, como tudo que eu construo.</div>
+</footer>
+
+<script>
+  const casos = [
+    {
+      pedido: "Controlo tudo do lava-jato numa planilha. Me perco na fila e esqueço de avisar o cliente.",
+      nome: "Brilho",
+      texto: "Um app para o balcão que substitui a planilha.",
+      itens: ["Fila de carros e agenda", "Caixa, fidelidade e relatórios", "Aviso pelo WhatsApp e comprovante"],
+      link: "https://github.com/Josue-Caetano/brilho-lavajato"
+    },
+    {
+      pedido: "Na oficina é ordem de serviço em papel, estoque de cabeça e comissão calculada na mão.",
+      nome: "OficinaMoto",
+      texto: "Um sistema completo para a oficina e o balcão de peças.",
+      itens: ["Ordem de serviço do orçamento à entrega", "Venda com leitor de código de barras", "Estoque, financeiro e 26 relatórios"],
+      link: "https://github.com/Josue-Caetano/oficina-moto"
+    },
+    {
+      pedido: "Calculadora financeira assusta quem nunca usou uma. Queria aprender usando.",
+      nome: "Calc12 Financeira",
+      texto: "Uma calculadora no navegador que ensina enquanto calcula.",
+      itens: ["Compatível com a HP 12C", "11 assistentes com gráficos", "9 aulas interativas"],
+      link: "https://github.com/Josue-Caetano/calc12-financeira"
+    },
+    {
+      pedido: "Quero testar meus sites no celular sem depender do computador ligado.",
+      nome: "Meus Projetos",
+      texto: "Um app Android que abre e testa projetos web direto no celular.",
+      itens: ["Importa do GitHub ou de ZIP", "Console de erros na tela", "Print com editor de anotações"],
+      link: "https://github.com/Josue-Caetano/meus-projetos-android"
+    }
+  ];
+
+  const abas = document.querySelectorAll(".aba");
+  const painel = document.querySelector(".painel");
+
+  function mostrar(i) {
+    const c = casos[i];
+    document.getElementById("pedido").textContent = c.pedido;
+    document.getElementById("entrega-nome").textContent = c.nome;
+    document.getElementById("entrega-texto").textContent = c.texto;
+    const ul = document.getElementById("entrega-itens");
+    ul.innerHTML = "";
+    c.itens.forEach(t => { const li = document.createElement("li"); li.textContent = t; ul.appendChild(li); });
+    document.getElementById("entrega-link").href = c.link;
+    abas.forEach((a, j) => a.setAttribute("aria-selected", j === i ? "true" : "false"));
+  }
+
+  abas.forEach(a => a.addEventListener("click", () => {
+    const i = Number(a.dataset.i);
+    painel.classList.add("trocando");
+    setTimeout(() => { mostrar(i); painel.classList.remove("trocando"); }, 180);
+  }));
+
+  mostrar(0);
+
+  // Se a foto do GitHub não carregar, mostra as iniciais.
+  document.querySelectorAll('img[src*="github.com/Josue-Caetano.png"]').forEach(img => {
+    img.addEventListener("error", () => {
+      const s = document.createElement("span");
+      s.textContent = "JC";
+      s.setAttribute("aria-hidden", "true");
+      s.style.cssText = "display:inline-grid;place-items:center;border-radius:50%;background:#5646D6;color:#fff;font-weight:800;width:" + img.width + "px;height:" + img.height + "px";
+      img.replaceWith(s);
+    });
+  });
+</script>
+</body>
+</html>
