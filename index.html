@@ -72,7 +72,15 @@
   .menu { display: flex; gap: 28px; }
   .menu a { color: var(--tinta); text-decoration: none; font-weight: 500; }
   .menu a:hover { color: var(--violeta); }
-  @media (max-width: 720px) { .menu { display: none; } }
+  .abre-menu { display: none; font: inherit; font-weight: 600; padding: 10px 18px; border-radius: 999px; border: 2px solid var(--tinta); background: transparent; color: var(--tinta); cursor: pointer; }
+  @media (max-width: 720px) {
+    .topo { flex-wrap: wrap; position: relative; }
+    .abre-menu { display: inline-flex; }
+    .menu { display: none; flex-direction: column; gap: 0; width: 100%; margin-top: 16px; background: var(--papel); border-radius: 20px; padding: 8px; box-shadow: 0 20px 40px -20px rgba(40, 30, 120, .35); }
+    .menu.aberto { display: flex; }
+    .menu a { padding: 14px 16px; border-radius: 12px; font-size: 1.0625rem; }
+    .menu a:hover { background: var(--violeta-claro); }
+  }
 
   /* Abertura */
   .abertura { display: grid; grid-template-columns: 1.05fr 1fr; gap: 56px; align-items: center; padding: 48px 0 96px; }
@@ -190,7 +198,8 @@
       <img src="foto.jpg" alt="" width="40" height="40">
       Josué Caetano
     </a>
-    <nav class="menu" aria-label="Seções">
+    <button class="abre-menu" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+    <nav class="menu" id="menu" aria-label="Seções">
       <a href="#projetos">Projetos</a>
       <a href="#como-trabalho">Como trabalho</a>
       <a href="#contato">Contato</a>
@@ -416,6 +425,20 @@
   }));
 
   mostrar(0);
+
+  // Menu no celular
+  const botaoMenu = document.querySelector(".abre-menu");
+  const menu = document.getElementById("menu");
+  botaoMenu.addEventListener("click", () => {
+    const aberto = menu.classList.toggle("aberto");
+    botaoMenu.setAttribute("aria-expanded", aberto ? "true" : "false");
+    botaoMenu.textContent = aberto ? "Fechar" : "Menu";
+  });
+  menu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+    menu.classList.remove("aberto");
+    botaoMenu.setAttribute("aria-expanded", "false");
+    botaoMenu.textContent = "Menu";
+  }));
 
   // Se a foto do GitHub não carregar, mostra as iniciais.
   document.querySelectorAll('img[src*="github.com/Josue-Caetano.png"]').forEach(img => {
