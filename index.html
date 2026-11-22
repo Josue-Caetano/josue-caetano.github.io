@@ -41,8 +41,10 @@
     *, *::before, *::after { transition: none !important; animation: none !important; }
   }
 
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   body {
     margin: 0;
+    overflow-x: hidden;
     background: var(--fundo);
     color: var(--tinta);
     font-family: var(--texto);
@@ -91,6 +93,7 @@
 
   /* Abertura */
   .abertura { display: grid; grid-template-columns: 1.3fr 1fr; gap: 56px; align-items: center; padding: 56px 0 112px; }
+  .abertura > * { min-width: 0; }
   @media (max-width: 920px) { .abertura { grid-template-columns: 1fr; gap: 40px; padding-top: 24px; } }
 
   .quem { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
@@ -98,13 +101,14 @@
   .quem strong { display: block; font-family: var(--display); font-size: 1.25rem; }
   .quem span { color: var(--tinta-suave); font-size: 1.0625rem; line-height: 1.5; }
 
-  .abertura h1 { font-size: clamp(2.5rem, 4.2vw, 3.5rem); text-wrap: balance; font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; }
+  .abertura h1 { font-size: clamp(2rem, 9vw, 3.5rem); overflow-wrap: break-word; text-wrap: balance; font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; }
   .abertura h1 .linha2 { display: block; color: var(--violeta); }
   .abertura .sub { margin-top: 24px; max-width: 34em; font-size: 1.1875rem; color: var(--tinta-suave); }
 
   .acoes { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
   .botao { display: inline-flex; align-items: center; padding: 14px 24px; border-radius: 999px; font-weight: 600; text-decoration: none; border: 2px solid var(--tinta); transition: transform .15s ease; }
   .botao:hover { transform: translateY(-2px); }
+  @media (max-width: 420px) { .acoes .botao { flex: 1; justify-content: center; padding: 14px 16px; } }
   .botao.cheio { background: var(--tinta); color: var(--papel); }
   .botao.vazado { color: var(--tinta); }
 
@@ -112,6 +116,7 @@
   .conversa { background: var(--papel); border-radius: 28px; padding: 24px; box-shadow: 0 30px 60px -30px rgba(40, 30, 120, .35); }
   .abas { display: flex; gap: 6px; margin-bottom: 22px; overflow-x: auto; scrollbar-width: none; }
   .abas::-webkit-scrollbar { display: none; }
+  @media (max-width: 560px) { .abas { flex-wrap: wrap; overflow: visible; } .conversa { padding: 18px; } }
   .aba { flex: none; font: inherit; font-size: .875rem; font-weight: 600; padding: 7px 12px; border-radius: 999px; border: 1.5px solid var(--linha); background: transparent; color: var(--tinta-suave); cursor: pointer; }
   .aba[aria-selected="true"] { background: var(--violeta); border-color: var(--violeta); color: var(--papel); }
 
