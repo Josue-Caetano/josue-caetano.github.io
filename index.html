@@ -179,6 +179,26 @@
   .tecnologias li { font-size: .875rem; font-weight: 600; padding: 4px 12px; border-radius: 999px; background: var(--papel); border: 1.5px solid var(--linha); }
   .projeto .ver { display: inline-block; margin-top: 20px; font-weight: 600; }
 
+  /* Planilha em app */
+  .planilha { background: var(--violeta-claro); }
+  .comparacao { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 920px; margin: 0 auto; }
+  @media (max-width: 720px) { .comparacao { grid-template-columns: 1fr; gap: 16px; } }
+  .lado { border-radius: 24px; padding: 28px; }
+  .lado h3 { margin-bottom: 16px; }
+  .lado ul { list-style: none; margin: 0; padding: 0; }
+  .lado li { position: relative; padding: 10px 0 10px 34px; border-top: 1.5px solid rgba(29, 27, 59, .08); }
+  .lado li:first-child { border-top: 0; }
+  .lado li::before { position: absolute; left: 0; top: 10px; width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: .8125rem; font-weight: 800; }
+  .lado.antes { background: var(--papel); color: var(--tinta-suave); }
+  .lado.antes h3 { color: var(--tinta); }
+  .lado.antes li::before { content: "✕"; background: #F4D9DC; color: #B3261E; }
+  .lado.depois { background: var(--tinta); color: #E4E2F3; }
+  .lado.depois h3 { color: var(--papel); }
+  .lado.depois li { border-top-color: rgba(255, 255, 255, .1); }
+  .lado.depois li::before { content: "✓"; background: var(--menta); color: var(--papel); }
+  .prova { text-align: center; margin: 32px auto 0; font-family: var(--display); font-size: 1.25rem; font-weight: 600; max-width: 30em; }
+  .planilha-acao { text-align: center; margin-top: 24px; }
+
   /* Como trabalho */
   .passos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; counter-reset: passo; list-style: none; padding: 0; margin: 0; }
   @media (max-width: 920px) { .passos { grid-template-columns: 1fr 1fr; } }
@@ -229,6 +249,7 @@
     <button class="abre-menu" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menu"><span></span></button>
     <nav class="menu" id="menu" aria-label="Seções">
       <a href="#projetos">Projetos</a>
+      <a href="#planilha">Planilha em app</a>
       <a href="#como-trabalho">Como trabalho</a>
       <a href="#contato">Contato</a>
     </nav>
@@ -369,6 +390,39 @@
   </div>
 </section>
 
+<section class="planilha" id="planilha">
+  <div class="faixa">
+    <div class="intro-secao">
+      <h2>Sua planilha pode virar um aplicativo</h2>
+      <p>Planilha é ótima no computador. No celular, é um sofrimento. Se o seu negócio roda numa planilha do Excel, eu transformo ela num app feito para o dia a dia.</p>
+    </div>
+    <div class="comparacao">
+      <div class="lado antes">
+        <h3>Planilha no celular</h3>
+        <ul>
+          <li>Células minúsculas e zoom o tempo todo</li>
+          <li>Um toque errado apaga uma fórmula</li>
+          <li>Cada pessoa com uma versão diferente do arquivo</li>
+          <li>Difícil de achar a informação na hora que precisa</li>
+        </ul>
+      </div>
+      <div class="lado depois">
+        <h3>No aplicativo</h3>
+        <ul>
+          <li>Botões grandes e telas pensadas para o celular</li>
+          <li>Os cálculos são feitos sozinhos, sem risco de quebrar</li>
+          <li>Busca, filtros, gráficos e relatórios prontos</li>
+          <li>Funciona sem internet e tem backup dos dados</li>
+        </ul>
+      </div>
+    </div>
+    <p class="prova">O Brilho e o Bolso Organizado começaram exatamente assim: como planilhas.</p>
+    <div class="planilha-acao">
+      <a class="botao cheio" id="planilha-whats" href="#contato">Quero transformar minha planilha</a>
+    </div>
+  </div>
+</section>
+
 <section id="como-trabalho">
   <div class="faixa">
     <div class="intro-secao">
@@ -483,6 +537,11 @@
     const n = WHATSAPP.replace(/^55/, "");
     document.getElementById("whatsapp-numero").textContent = "(" + n.slice(0, 2) + ") " + n.slice(2, -4) + "-" + n.slice(-4);
     w.hidden = false;
+  }
+
+  if (WHATSAPP) {
+    const pw = document.getElementById("planilha-whats");
+    pw.href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent("Olá, Josué! Tenho uma planilha e quero transformar num aplicativo.");
   }
 
   // Menu no celular
